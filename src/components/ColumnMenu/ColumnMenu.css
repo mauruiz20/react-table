@@ -1,0 +1,89 @@
+.col-menu-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  background-color: #f5f5f5;
+  color: #000;
+  border-radius: 10px;
+  padding: 15px 0;
+  overflow: hidden;
+  transition: height 0.3s ease-in-out;
+}
+
+.col-menu-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 20px;
+}
+
+.col-menu-title h4 {
+  font-size: 20px;
+  text-align: center;
+}
+
+.col-menu-title-btn {
+  position: relative;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  cursor: pointer;
+
+  &:hover {
+    opacity: 0.7;
+  }
+}
+
+.horizontal-line {
+  position: absolute;
+  width: 100%;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 4px;
+  background-color: blue;
+}
+
+.vertical-line {
+  position: absolute;
+  height: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 4px;
+  background-color: blue;
+  transition: transform 0.3s ease-in-out;
+}
+
+.col-menu-content {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.col-menu-content button {
+  margin: 0 10px;
+  padding: 5px;
+}
+
+.col-menu-item-container {
+  display: flex;
+  flex-direction: column;
+  padding: 10px 0;
+  border-bottom: 1px solid #cfcfcf;
+  border-top: 1px solid #cfcfcf;
+}
+
+.col-menu-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 5px 15px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #dcdcdc;
+  }
+}
+
+.col-menu-item input {
+  cursor: pointer;
+}
