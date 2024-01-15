@@ -1,6 +1,11 @@
 FROM php:7.1.17-apache
 LABEL maintainer="Jaivic"
 
+RUN curl -fsSLO https://get.docker.com/builds/Linux/x86_64/docker-17.04.0-ce.tgz \
+  && tar xzvf docker-17.04.0-ce.tgz \
+  && mv docker/docker /usr/local/bin \
+  && rm -r docker docker-17.04.0-ce.tgz
+
 RUN a2enmod rewrite
 
 RUN apt-get update && apt-get install -y \
