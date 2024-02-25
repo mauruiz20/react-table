@@ -1,31 +1,30 @@
-import './Table.css';
+import './Table.css'
 
 export interface RowInterface {
-  id: number;
-  [key: string]: string | number;
+  id: number
 }
 
-export interface ColumnInterface {
-  field: string;
-  label: string;
-  visible: boolean;
-  align?: 'left' | 'right' | 'center';
-  width?: number;
-  renderCell?: (row: RowInterface) => React.ReactNode;
+export interface ColumnInterface<T> {
+  field: string
+  label: string
+  visible: boolean
+  align?: 'left' | 'right' | 'center'
+  width?: number
+  renderCell?: (row: T) => React.ReactNode
 }
 
-interface TableInterface {
-  rows: RowInterface[];
-  columns: ColumnInterface[];
+interface TableInterface<T> {
+  rows: T[]
+  columns: ColumnInterface<T>[]
 }
 
-const Table: React.FC<TableInterface> = ({ rows, columns }) => {
+const Table = <T,>({ rows, columns }: TableInterface<T & RowInterface>) => {
   if (rows.length === 0) {
     return (
       <table className='table table-empty'>
         <tr>No data</tr>
       </table>
-    );
+    )
   }
 
   return (
@@ -38,11 +37,14 @@ const Table: React.FC<TableInterface> = ({ rows, columns }) => {
                 <td
                   className='table-cell'
                   key={column.field}
-                  style={{ textAlign: column.align, width: `${column.width}px` }}
+                  style={{
+                    textAlign: column.align,
+                    width: `${column.width}px`
+                  }}
                 >
                   {column.label}
                 </td>
-              ),
+              )
           )}
         </tr>
       </thead>
@@ -52,16 +54,23 @@ const Table: React.FC<TableInterface> = ({ rows, columns }) => {
             {columns.map(
               (column) =>
                 column.visible && (
-                  <td className='table-cell' key={column.field} style={{ textAlign: column.align }}>
-                    {column.renderCell ? column.renderCell(row) : row[column.field] || '-'}
+                  <td
+                    className='table-cell'
+                    key={column.field}
+                    style={{ textAlign: column.align }}
+                  >
+                    {column.renderCell
+                      ? column.renderCell(row)
+                      : (row[column.field as keyof T] as React.ReactNode) ||
+                        '-'}
                   </td>
-                ),
+                )
             )}
           </tr>
         ))}
       </tbody>
     </table>
-  );
-};
+  )
+}
 
-export default Table;
+export default Table
