@@ -1,41 +1,48 @@
-import { useState } from 'react';
+import { useState } from 'react'
 
-import { ColumnInterface } from '../Table/Table';
-import './ColumnMenu.css';
+import { ColumnInterface } from '../Table/Table'
+import './ColumnMenu.css'
 
-interface ColumnMenuInterface {
-  columns: ColumnInterface[];
-  setColumns: (columns: ColumnInterface[]) => void;
+interface ColumnMenuInterface<T> {
+  columns: ColumnInterface<T>[]
+  setColumns: (columns: ColumnInterface<T>[]) => void
 }
 
-const ColumnMenu: React.FC<ColumnMenuInterface> = ({ columns, setColumns }) => {
-  const [isOpen, setIsOpen] = useState(false);
+const ColumnMenu = <T,>({ columns, setColumns }: ColumnMenuInterface<T>) => {
+  const [isOpen, setIsOpen] = useState(false)
 
-  const handleOpen = () => setIsOpen(!isOpen);
+  const handleOpen = () => setIsOpen(!isOpen)
 
   const handleCheck = (name: string) => {
     const newColumns = columns.map((column) => {
       if (column.field === name) {
-        return { ...column, visible: !column.visible };
+        return { ...column, visible: !column.visible }
       }
-      return column;
-    });
-    setColumns(newColumns);
-  };
+      return column
+    })
+    setColumns(newColumns)
+  }
 
   const handleReset = () => {
-    const newColumns = columns.map((column) => ({ ...column, visible: true }));
-    setColumns(newColumns);
-  };
+    const newColumns = columns.map((column) => ({ ...column, visible: true }))
+    setColumns(newColumns)
+  }
 
   return (
-    <div className='col-menu-container' style={{ height: isOpen ? '400px' : '60px' }}>
+    <div
+      className='col-menu-container'
+      style={{ height: isOpen ? '400px' : '60px' }}
+    >
       <div className='col-menu-title'>
         <div className='col-menu-title-btn' onClick={handleOpen}>
           <div className='horizontal-line'></div>
           <div
             className='vertical-line'
-            style={{ transform: isOpen ? 'rotate(90deg)' : 'translateX(-50%) rotate(0deg)' }}
+            style={{
+              transform: isOpen
+                ? 'rotate(90deg)'
+                : 'translateX(-50%) rotate(0deg)'
+            }}
           ></div>
         </div>
         <h4>Columns</h4>
@@ -61,7 +68,7 @@ const ColumnMenu: React.FC<ColumnMenuInterface> = ({ columns, setColumns }) => {
         <button onClick={handleReset}>Reset</button>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default ColumnMenu;
+export default ColumnMenu
