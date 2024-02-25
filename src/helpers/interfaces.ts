@@ -1,4 +1,4 @@
-export interface ClienteInterface {
+export interface ClientInterface {
   id: number
   name: string
   surname: string
